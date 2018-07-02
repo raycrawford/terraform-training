@@ -18,24 +18,21 @@ If a Windows host is being used, install the above dependencies, manually.
 
 # Build Terraform image
 We will be using Terraform in a container.  To do this:
-* Copy [Terraform docker file from here](https://hub.docker.com/r/hashicorp/terraform/~/dockerfile/), locally
+* Use the Dockerfile in this directory; it's very similar to the [Terraform Dockerfile](https://hub.docker.com/r/hashicorp/terraform/~/dockerfile/) but it sets some additional variables to help with abstraction
 * Execute a `docker build . --tag terraform`
 * Test and find out most recent version using `docker run -i -t terraform -v`
 * If when run, a more recent version of Terraform is available, update Dockerfile `ENV TERRAFORM_VERSION=` and run `docker rmi terraform && docker build . --tag terraform`
 
-The most recent version of terraform is now available in a container tagged "terraform" which can be executed at any time using `docker run -i -t terraform [command]`.
+The most recent version of terraform is now available in a container tagged "terraform".  Because the container must run as a user who can update the Azure fabric, tfApply.sh and tfDestroy.sh scripts are available in the next directory to demonstrate abstraction.
 
-# Log into Azure and set subscription
+## Rapid itteration on Dockerfile
+It takes a few minutes to rebuild the terraform image.  To expedite itterations, only the final layer can be deleted using:
+
 ```
-az login
-az account list -o table
-Name                              CloudName    SubscriptionId                        State    IsDefault
---------------------------------  -----------  ------------------------------------  -------  -----------
-Pay-As-You-Go                     AzureCloud   12345678-3210-3456-2345-901234567890  Enabled  True
-Visual Studio Ultimate with MSDN  AzureCloud   87654321-0123-6543-5432-098765432109  Enabled  False
-az account set --subscription 87654321-0123-6543-5432-098765432109
-az account list -o table
-Name                              CloudName    SubscriptionId                        State    IsDefault
---------------------------------  -----------  ------------------------------------  -------  -----------
-Pay-As-You-Go                     AzureCloud   12345678-3210-3456-2345-901234567890  Enabled  False
-Visual Studio Ultimate with MSDN  AzureCloud   87654321-0123-6543-5432-098765432109  Enabled  True
+docker rmi terraform --no-prune
+docker build . --tag terraform
+```
+
+# Creating Service Principal
+
+# Managing Secrets
