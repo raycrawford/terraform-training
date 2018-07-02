@@ -24,3 +24,18 @@ We will be using Terraform in a container.  To do this:
 * If when run, a more recent version of Terraform is available, update Dockerfile `ENV TERRAFORM_VERSION=` and run `docker rmi terraform && docker build . --tag terraform`
 
 The most recent version of terraform is now available in a container tagged "terraform" which can be executed at any time using `docker run -i -t terraform [command]`.
+
+# Log into Azure and set subscription
+```
+az login
+az account list -o table
+Name                              CloudName    SubscriptionId                        State    IsDefault
+--------------------------------  -----------  ------------------------------------  -------  -----------
+Pay-As-You-Go                     AzureCloud   12345678-3210-3456-2345-901234567890  Enabled  True
+Visual Studio Ultimate with MSDN  AzureCloud   87654321-0123-6543-5432-098765432109  Enabled  False
+az account set --subscription 87654321-0123-6543-5432-098765432109
+az account list -o table
+Name                              CloudName    SubscriptionId                        State    IsDefault
+--------------------------------  -----------  ------------------------------------  -------  -----------
+Pay-As-You-Go                     AzureCloud   12345678-3210-3456-2345-901234567890  Enabled  False
+Visual Studio Ultimate with MSDN  AzureCloud   87654321-0123-6543-5432-098765432109  Enabled  True
