@@ -1,0 +1,6 @@
+provider "azurerm" {
+    tenant_id = "xxxx"
+    subscription_id = "xxxx"
+    client_id = "xxxx"
+    client_secret = "xxxx"
+}
