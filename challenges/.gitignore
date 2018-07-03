@@ -1,2 +1,5 @@
 myCreds.secret.sh
 provider.tf
+.terraform
+*.tfstate
+*.tfstate.backup
