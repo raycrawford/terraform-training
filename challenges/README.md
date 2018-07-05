@@ -10,7 +10,11 @@
 * Chapter 6: Output Variables
    * https://www.terraform.io/docs/configuration/outputs.html
 * Chapter 7: Looping
-* Chapter 8: Other considerations
+   * Incorporting conditionals and counts to disable a resource
+      * https://www.terraform.io/docs/configuration/interpolation.html#conditionals
+* Chapter 8: Built-in functions
+   * https://www.terraform.io/docs/configuration/interpolation.html#built-in-functions
+* Chapter 9: Other considerations
   * Tainted resources
     *  https://www.terraform.io/intro/getting-started/provision.html
   * Provisioners
